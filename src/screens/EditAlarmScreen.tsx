@@ -1,23 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
-  ScrollView,
-  TextInput,
-  TouchableOpacity,
   StyleSheet,
+  TouchableOpacity,
+  TextInput,
+  ScrollView,
+  Platform,
   Alert,
   Modal,
-  Platform,
 } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../contexts/ThemeContext';
-import { Button } from '../components/Button';
 import { Alarm, DayOfWeek, DismissMethod } from '../types';
+import { Button } from '../components/Button';
 import { storageService } from '../services/storageService';
 import { generateId } from '../utils';
-import { SPACING, FONT_SIZES, FONT_WEIGHTS, DAY_LABELS, SOUNDS } from '../constants';
+import {
+  SPACING,
+  FONT_SIZES,
+  FONT_WEIGHTS,
+  SOUNDS,
+  DAY_LABELS,
+} from '../constants';
 
 interface EditAlarmScreenProps {
   navigation: any;
@@ -94,7 +100,7 @@ export const EditAlarmScreen: React.FC<EditAlarmScreenProps> = ({ navigation, ro
     <View style={styles.repeatSection}>
       <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>Repeat</Text>
       <View style={styles.dayButtons}>
-        {DAY_LABELS.map((dayLabel, index) => {
+        {DAY_LABELS.map((dayLabel: string, index: number) => {
           const isSelected = repeatDays.includes(index);
           return (
             <TouchableOpacity
@@ -388,7 +394,7 @@ export const EditAlarmScreen: React.FC<EditAlarmScreenProps> = ({ navigation, ro
           <View style={styles.modalContent}>
             <Text style={styles.modalTitle}>Select Sound</Text>
             <ScrollView>
-              {SOUNDS.map((soundOption) => (
+              {SOUNDS.map((soundOption: string) => (
                 <TouchableOpacity
                   key={soundOption}
                   style={[
